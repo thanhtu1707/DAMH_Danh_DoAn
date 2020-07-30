@@ -1,0 +1,7 @@
+D:\HOC_TAP\DAMH_Danh-master\DAL\bin\Debug\DAL.dll.config
+D:\HOC_TAP\DAMH_Danh-master\DAL\bin\Debug\DAL.dll
+D:\HOC_TAP\DAMH_Danh-master\DAL\bin\Debug\DAL.pdb
+D:\HOC_TAP\DAMH_Danh-master\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+D:\HOC_TAP\DAMH_Danh-master\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\HOC_TAP\DAMH_Danh-master\DAL\obj\Debug\DAL.dll
+D:\HOC_TAP\DAMH_Danh-master\DAL\obj\Debug\DAL.pdb
