@@ -88,6 +88,12 @@
     <Compile Include="ChiTietDonHang.Designer.cs">
       <DependentUpon>ChiTietDonHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="DS_DonDatHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DS_DonDatHang.Designer.cs">
+      <DependentUpon>DS_DonDatHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,11 +106,29 @@
     <Compile Include="frm_DangNhap.Designer.cs">
       <DependentUpon>frm_DangNhap.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_DonDatHang1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_DonDatHang1.Designer.cs">
+      <DependentUpon>frm_DonDatHang1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_DS_TaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_DS_TaiKhoan.Designer.cs">
+      <DependentUpon>frm_DS_TaiKhoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_DTTheoNgay.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_DTTheoNgay.Designer.cs">
       <DependentUpon>frm_DTTheoNgay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_NhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_NhanVien.Designer.cs">
+      <DependentUpon>frm_NhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_Order.cs">
       <SubType>Form</SubType>
@@ -123,6 +147,12 @@
     </Compile>
     <Compile Include="frm_Main.Designer.cs">
       <DependentUpon>frm_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_PhieuXuat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_PhieuXuat.Designer.cs">
+      <DependentUpon>frm_PhieuXuat.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_QLLoai.cs">
       <SubType>Form</SubType>
@@ -165,14 +195,26 @@
     <EmbeddedResource Include="ChiTietDonHang.resx">
       <DependentUpon>ChiTietDonHang.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DS_DonDatHang.resx">
+      <DependentUpon>DS_DonDatHang.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_DangNhap.resx">
       <DependentUpon>frm_DangNhap.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frm_DonDatHang1.resx">
+      <DependentUpon>frm_DonDatHang1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_DS_TaiKhoan.resx">
+      <DependentUpon>frm_DS_TaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_DTTheoNgay.resx">
       <DependentUpon>frm_DTTheoNgay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_NhanVien.resx">
+      <DependentUpon>frm_NhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Order.resx">
       <DependentUpon>frm_Order.cs</DependentUpon>
@@ -182,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Main.resx">
       <DependentUpon>frm_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_PhieuXuat.resx">
+      <DependentUpon>frm_PhieuXuat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_QLLoai.resx">
       <DependentUpon>frm_QLLoai.cs</DependentUpon>
