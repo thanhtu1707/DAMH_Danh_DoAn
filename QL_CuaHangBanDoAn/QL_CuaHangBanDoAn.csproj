@@ -82,12 +82,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChiTietDonHang.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ChiTietDonHang.Designer.cs">
-      <DependentUpon>ChiTietDonHang.cs</DependentUpon>
-    </Compile>
     <Compile Include="DS_DonDatHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,29 +118,17 @@
     <Compile Include="frm_DTTheoNgay.Designer.cs">
       <DependentUpon>frm_DTTheoNgay.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_NhanVien.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_NhanVien.Designer.cs">
-      <DependentUpon>frm_NhanVien.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_Order.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_Order.Designer.cs">
-      <DependentUpon>frm_Order.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_DonDatHang.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_DonDatHang.Designer.cs">
-      <DependentUpon>frm_DonDatHang.cs</DependentUpon>
-    </Compile>
     <Compile Include="frm_Main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_Main.Designer.cs">
       <DependentUpon>frm_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_NhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_NhanVien.Designer.cs">
+      <DependentUpon>frm_NhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_PhieuXuat.cs">
       <SubType>Form</SubType>
@@ -160,23 +142,11 @@
     <Compile Include="frm_QLLoai.Designer.cs">
       <DependentUpon>frm_QLLoai.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_QLMonAn.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_QLMonAn.Designer.cs">
-      <DependentUpon>frm_QLMonAn.cs</DependentUpon>
-    </Compile>
     <Compile Include="frm_Home.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_Home.Designer.cs">
       <DependentUpon>frm_Home.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_QLNCC.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_QLNCC.Designer.cs">
-      <DependentUpon>frm_QLNCC.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_QLNguyenLieu.cs">
       <SubType>Form</SubType>
@@ -184,17 +154,32 @@
     <Compile Include="frm_QLNguyenLieu.Designer.cs">
       <DependentUpon>frm_QLNguyenLieu.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_XuatHang.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_XuatHang.Designer.cs">
-      <DependentUpon>frm_XuatHang.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ChiTietDonHang.resx">
-      <DependentUpon>ChiTietDonHang.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="frm_QLNCC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_QLNCC.Designer.cs">
+      <DependentUpon>frm_QLNCC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_QLMonAn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_QLMonAn.Designer.cs">
+      <DependentUpon>frm_QLMonAn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Order.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Order.Designer.cs">
+      <DependentUpon>frm_Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RibbonForm1.Designer.cs">
+      <DependentUpon>RibbonForm1.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DS_DonDatHang.resx">
       <DependentUpon>DS_DonDatHang.cs</DependentUpon>
     </EmbeddedResource>
@@ -213,17 +198,11 @@
     <EmbeddedResource Include="frm_DTTheoNgay.resx">
       <DependentUpon>frm_DTTheoNgay.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_NhanVien.resx">
-      <DependentUpon>frm_NhanVien.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_Order.resx">
-      <DependentUpon>frm_Order.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_DonDatHang.resx">
-      <DependentUpon>frm_DonDatHang.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frm_Main.resx">
       <DependentUpon>frm_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_NhanVien.resx">
+      <DependentUpon>frm_NhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_PhieuXuat.resx">
       <DependentUpon>frm_PhieuXuat.cs</DependentUpon>
@@ -231,26 +210,29 @@
     <EmbeddedResource Include="frm_QLLoai.resx">
       <DependentUpon>frm_QLLoai.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_QLMonAn.resx">
-      <DependentUpon>frm_QLMonAn.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frm_Home.resx">
       <DependentUpon>frm_Home.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_QLNCC.resx">
-      <DependentUpon>frm_QLNCC.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frm_QLNguyenLieu.resx">
       <DependentUpon>frm_QLNguyenLieu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_XuatHang.resx">
-      <DependentUpon>frm_XuatHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_QLNCC.resx">
+      <DependentUpon>frm_QLNCC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_QLMonAn.resx">
+      <DependentUpon>frm_QLMonAn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Order.resx">
+      <DependentUpon>frm_Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RibbonForm1.resx">
+      <DependentUpon>RibbonForm1.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

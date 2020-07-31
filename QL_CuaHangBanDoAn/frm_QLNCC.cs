@@ -17,12 +17,5 @@ namespace QL_CuaHangBanDoAn
         {
             InitializeComponent();
         }
-
-        private void frm_QLNCC_Load(object sender, EventArgs e)
-        {
-
-        }
-
-       
     }
 }

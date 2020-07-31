@@ -17,7 +17,5 @@ namespace QL_CuaHangBanDoAn
         {
             InitializeComponent();
         }
-
-        
     }
 }

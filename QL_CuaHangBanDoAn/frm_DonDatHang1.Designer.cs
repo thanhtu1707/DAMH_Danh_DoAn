@@ -760,12 +760,15 @@
             // 
             // frm_DonDatHang1
             // 
+            this.Appearance.BackColor = System.Drawing.Color.White;
+            this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 490);
             this.Controls.Add(this.layoutControl1);
             this.Name = "frm_DonDatHang1";
             this.Text = "frm_DonDatHang1";
+            this.Load += new System.EventHandler(this.frm_DonDatHang1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textEdit11.Properties)).EndInit();

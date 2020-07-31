@@ -14,9 +14,11 @@ namespace DAL
         //{
 
         //}
-        public IQueryable<NhaCungCap> loadCboNCC()
+        public IQueryable<NhaCungCap> load_cboTenNCC()
         {
             return ql.NhaCungCaps.Select(ncc => ncc);
+
+
         }
     }
 }

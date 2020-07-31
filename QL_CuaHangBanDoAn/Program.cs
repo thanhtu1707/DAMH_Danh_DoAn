@@ -17,7 +17,8 @@ namespace QL_CuaHangBanDoAn
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frm_Main());
-           // Application.Run(new frm_DonDatHang());
+            // Application.Run(new frm_DonDatHang1());
+           // Application.Run(new frm_DangNhap());
         }
     }
 }

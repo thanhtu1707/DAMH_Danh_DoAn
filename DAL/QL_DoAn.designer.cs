@@ -66,12 +66,12 @@ namespace DAL
     partial void InsertNhanVien(NhanVien instance);
     partial void UpdateNhanVien(NhanVien instance);
     partial void DeleteNhanVien(NhanVien instance);
-    partial void InsertNL_NCC(NL_NCC instance);
-    partial void UpdateNL_NCC(NL_NCC instance);
-    partial void DeleteNL_NCC(NL_NCC instance);
     partial void InsertPhieuXuat(PhieuXuat instance);
     partial void UpdatePhieuXuat(PhieuXuat instance);
     partial void DeletePhieuXuat(PhieuXuat instance);
+    partial void InsertQuyen(Quyen instance);
+    partial void UpdateQuyen(Quyen instance);
+    partial void DeleteQuyen(Quyen instance);
     #endregion
 		
 		public QL_DoAnDataContext() : 
@@ -200,19 +200,19 @@ namespace DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<NL_NCC> NL_NCCs
-		{
-			get
-			{
-				return this.GetTable<NL_NCC>();
-			}
-		}
-		
 		public System.Data.Linq.Table<PhieuXuat> PhieuXuats
 		{
 			get
 			{
 				return this.GetTable<PhieuXuat>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Quyen> Quyens
+		{
+			get
+			{
+				return this.GetTable<Quyen>();
 			}
 		}
 	}
@@ -223,17 +223,19 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaCV;
+		private string _MaCV;
 		
 		private string _TenCV;
 		
 		private EntitySet<NhanVien> _NhanViens;
 		
+		private EntitySet<Quyen> _Quyens;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaCVChanging(int value);
+    partial void OnMaCVChanging(string value);
     partial void OnMaCVChanged();
     partial void OnTenCVChanging(string value);
     partial void OnTenCVChanged();
@@ -242,11 +244,12 @@ namespace DAL
 		public ChucVu()
 		{
 			this._NhanViens = new EntitySet<NhanVien>(new Action<NhanVien>(this.attach_NhanViens), new Action<NhanVien>(this.detach_NhanViens));
+			this._Quyens = new EntitySet<Quyen>(new Action<Quyen>(this.attach_Quyens), new Action<Quyen>(this.detach_Quyens));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaCV", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MaCV
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaCV", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaCV
 		{
 			get
 			{
@@ -298,6 +301,19 @@ namespace DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ChucVu_Quyen", Storage="_Quyens", ThisKey="MaCV", OtherKey="MaCV")]
+		public EntitySet<Quyen> Quyens
+		{
+			get
+			{
+				return this._Quyens;
+			}
+			set
+			{
+				this._Quyens.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -329,6 +345,18 @@ namespace DAL
 			this.SendPropertyChanging();
 			entity.ChucVu = null;
 		}
+		
+		private void attach_Quyens(Quyen entity)
+		{
+			this.SendPropertyChanging();
+			entity.ChucVu = this;
+		}
+		
+		private void detach_Quyens(Quyen entity)
+		{
+			this.SendPropertyChanging();
+			entity.ChucVu = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TaiKhoan")]
@@ -337,13 +365,13 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaTK;
+		private string _MaTK;
 		
 		private string _TenTK;
 		
 		private string _MatKhau;
 		
-		private int _MaNV;
+		private string _MaNV;
 		
 		private EntityRef<NhanVien> _NhanVien;
 		
@@ -351,13 +379,13 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaTKChanging(int value);
+    partial void OnMaTKChanging(string value);
     partial void OnMaTKChanged();
     partial void OnTenTKChanging(string value);
     partial void OnTenTKChanged();
     partial void OnMatKhauChanging(string value);
     partial void OnMatKhauChanged();
-    partial void OnMaNVChanging(int value);
+    partial void OnMaNVChanging(string value);
     partial void OnMaNVChanged();
     #endregion
 		
@@ -367,8 +395,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaTK", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MaTK
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaTK", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaTK
 		{
 			get
 			{
@@ -427,8 +455,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="Int NOT NULL")]
-		public int MaNV
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="Char(20) NOT NULL", CanBeNull=false)]
+		public string MaNV
 		{
 			get
 			{
@@ -478,7 +506,7 @@ namespace DAL
 					}
 					else
 					{
-						this._MaNV = default(int);
+						this._MaNV = default(string);
 					}
 					this.SendPropertyChanged("NhanVien");
 				}
@@ -512,9 +540,9 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaDDH;
+		private string _MaDDH;
 		
-		private int _MaNL;
+		private string _MaNL;
 		
 		private System.Nullable<int> _SoLuong;
 		
@@ -528,9 +556,9 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaDDHChanging(int value);
+    partial void OnMaDDHChanging(string value);
     partial void OnMaDDHChanged();
-    partial void OnMaNLChanging(int value);
+    partial void OnMaNLChanging(string value);
     partial void OnMaNLChanged();
     partial void OnSoLuongChanging(System.Nullable<int> value);
     partial void OnSoLuongChanged();
@@ -545,8 +573,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDDH", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaDDH
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDDH", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaDDH
 		{
 			get
 			{
@@ -569,8 +597,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNL", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaNL
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNL", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaNL
 		{
 			get
 			{
@@ -660,7 +688,7 @@ namespace DAL
 					}
 					else
 					{
-						this._MaDDH = default(int);
+						this._MaDDH = default(string);
 					}
 					this.SendPropertyChanged("DonDatHang");
 				}
@@ -694,7 +722,7 @@ namespace DAL
 					}
 					else
 					{
-						this._MaNL = default(int);
+						this._MaNL = default(string);
 					}
 					this.SendPropertyChanged("NguyenLieu");
 				}
@@ -728,9 +756,9 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaHD;
+		private string _MaHD;
 		
-		private int _MaMonAn;
+		private string _MaMonAn;
 		
 		private System.Nullable<int> _SoLuong;
 		
@@ -744,9 +772,9 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaHDChanging(int value);
+    partial void OnMaHDChanging(string value);
     partial void OnMaHDChanged();
-    partial void OnMaMonAnChanging(int value);
+    partial void OnMaMonAnChanging(string value);
     partial void OnMaMonAnChanged();
     partial void OnSoLuongChanging(System.Nullable<int> value);
     partial void OnSoLuongChanged();
@@ -761,8 +789,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaHD", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaHD
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaHD", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaHD
 		{
 			get
 			{
@@ -785,8 +813,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaMonAn", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaMonAn
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaMonAn", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaMonAn
 		{
 			get
 			{
@@ -876,7 +904,7 @@ namespace DAL
 					}
 					else
 					{
-						this._MaHD = default(int);
+						this._MaHD = default(string);
 					}
 					this.SendPropertyChanged("HoaDon");
 				}
@@ -910,7 +938,7 @@ namespace DAL
 					}
 					else
 					{
-						this._MaMonAn = default(int);
+						this._MaMonAn = default(string);
 					}
 					this.SendPropertyChanged("MonAn");
 				}
@@ -944,9 +972,9 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaPX;
+		private string _MaPX;
 		
-		private int _MaNL;
+		private string _MaNL;
 		
 		private System.Nullable<int> _SoLuong;
 		
@@ -958,9 +986,9 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaPXChanging(int value);
+    partial void OnMaPXChanging(string value);
     partial void OnMaPXChanged();
-    partial void OnMaNLChanging(int value);
+    partial void OnMaNLChanging(string value);
     partial void OnMaNLChanged();
     partial void OnSoLuongChanging(System.Nullable<int> value);
     partial void OnSoLuongChanged();
@@ -973,8 +1001,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaPX", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaPX
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaPX", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaPX
 		{
 			get
 			{
@@ -997,8 +1025,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNL", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaNL
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNL", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaNL
 		{
 			get
 			{
@@ -1068,7 +1096,7 @@ namespace DAL
 					}
 					else
 					{
-						this._MaNL = default(int);
+						this._MaNL = default(string);
 					}
 					this.SendPropertyChanged("NguyenLieu");
 				}
@@ -1102,7 +1130,7 @@ namespace DAL
 					}
 					else
 					{
-						this._MaPX = default(int);
+						this._MaPX = default(string);
 					}
 					this.SendPropertyChanged("PhieuXuat");
 				}
@@ -1136,11 +1164,11 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaDDH;
+		private string _MaDDH;
 		
-		private int _MaNCC;
+		private string _MaNCC;
 		
-		private int _MaNV;
+		private string _MaNV;
 		
 		private System.Nullable<System.DateTime> _NgayNhap;
 		
@@ -1156,11 +1184,11 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaDDHChanging(int value);
+    partial void OnMaDDHChanging(string value);
     partial void OnMaDDHChanged();
-    partial void OnMaNCCChanging(int value);
+    partial void OnMaNCCChanging(string value);
     partial void OnMaNCCChanged();
-    partial void OnMaNVChanging(int value);
+    partial void OnMaNVChanging(string value);
     partial void OnMaNVChanged();
     partial void OnNgayNhapChanging(System.Nullable<System.DateTime> value);
     partial void OnNgayNhapChanged();
@@ -1176,8 +1204,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDDH", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MaDDH
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDDH", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaDDH
 		{
 			get
 			{
@@ -1196,8 +1224,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNCC", DbType="Int NOT NULL")]
-		public int MaNCC
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNCC", DbType="Char(20) NOT NULL", CanBeNull=false)]
+		public string MaNCC
 		{
 			get
 			{
@@ -1220,8 +1248,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="Int NOT NULL")]
-		public int MaNV
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="Char(20) NOT NULL", CanBeNull=false)]
+		public string MaNV
 		{
 			get
 			{
@@ -1324,7 +1352,7 @@ namespace DAL
 					}
 					else
 					{
-						this._MaNCC = default(int);
+						this._MaNCC = default(string);
 					}
 					this.SendPropertyChanged("NhaCungCap");
 				}
@@ -1358,7 +1386,7 @@ namespace DAL
 					}
 					else
 					{
-						this._MaNV = default(int);
+						this._MaNV = default(string);
 					}
 					this.SendPropertyChanged("NhanVien");
 				}
@@ -1404,11 +1432,13 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaHD;
+		private string _MaHD;
 		
-		private System.Nullable<int> _MaNV;
+		private string _MaNV;
 		
 		private System.Nullable<System.DateTime> _NgayLap;
+		
+		private System.Nullable<int> _TongTien;
 		
 		private EntitySet<CT_HoaDon> _CT_HoaDons;
 		
@@ -1418,12 +1448,14 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaHDChanging(int value);
+    partial void OnMaHDChanging(string value);
     partial void OnMaHDChanged();
-    partial void OnMaNVChanging(System.Nullable<int> value);
+    partial void OnMaNVChanging(string value);
     partial void OnMaNVChanged();
     partial void OnNgayLapChanging(System.Nullable<System.DateTime> value);
     partial void OnNgayLapChanged();
+    partial void OnTongTienChanging(System.Nullable<int> value);
+    partial void OnTongTienChanged();
     #endregion
 		
 		public HoaDon()
@@ -1433,8 +1465,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaHD", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MaHD
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaHD", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaHD
 		{
 			get
 			{
@@ -1453,8 +1485,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="Int")]
-		public System.Nullable<int> MaNV
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="Char(20)")]
+		public string MaNV
 		{
 			get
 			{
@@ -1493,6 +1525,26 @@ namespace DAL
 					this._NgayLap = value;
 					this.SendPropertyChanged("NgayLap");
 					this.OnNgayLapChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TongTien", DbType="Int")]
+		public System.Nullable<int> TongTien
+		{
+			get
+			{
+				return this._TongTien;
+			}
+			set
+			{
+				if ((this._TongTien != value))
+				{
+					this.OnTongTienChanging(value);
+					this.SendPropertyChanging();
+					this._TongTien = value;
+					this.SendPropertyChanged("TongTien");
+					this.OnTongTienChanged();
 				}
 			}
 		}
@@ -1537,7 +1589,7 @@ namespace DAL
 					}
 					else
 					{
-						this._MaNV = default(Nullable<int>);
+						this._MaNV = default(string);
 					}
 					this.SendPropertyChanged("NhanVien");
 				}
@@ -1583,9 +1635,9 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaDanhMuc;
+		private string _MaLoai;
 		
-		private string _TenDanhMuc;
+		private string _TenLoai;
 		
 		private EntitySet<MonAn> _MonAns;
 		
@@ -1593,10 +1645,10 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaDanhMucChanging(int value);
-    partial void OnMaDanhMucChanged();
-    partial void OnTenDanhMucChanging(string value);
-    partial void OnTenDanhMucChanged();
+    partial void OnMaLoaiChanging(string value);
+    partial void OnMaLoaiChanged();
+    partial void OnTenLoaiChanging(string value);
+    partial void OnTenLoaiChanged();
     #endregion
 		
 		public LoaiMonAn()
@@ -1605,47 +1657,47 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDanhMuc", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MaDanhMuc
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaLoai", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaLoai
 		{
 			get
 			{
-				return this._MaDanhMuc;
+				return this._MaLoai;
 			}
 			set
 			{
-				if ((this._MaDanhMuc != value))
+				if ((this._MaLoai != value))
 				{
-					this.OnMaDanhMucChanging(value);
+					this.OnMaLoaiChanging(value);
 					this.SendPropertyChanging();
-					this._MaDanhMuc = value;
-					this.SendPropertyChanged("MaDanhMuc");
-					this.OnMaDanhMucChanged();
+					this._MaLoai = value;
+					this.SendPropertyChanged("MaLoai");
+					this.OnMaLoaiChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenDanhMuc", DbType="NVarChar(100)")]
-		public string TenDanhMuc
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenLoai", DbType="NVarChar(100)")]
+		public string TenLoai
 		{
 			get
 			{
-				return this._TenDanhMuc;
+				return this._TenLoai;
 			}
 			set
 			{
-				if ((this._TenDanhMuc != value))
+				if ((this._TenLoai != value))
 				{
-					this.OnTenDanhMucChanging(value);
+					this.OnTenLoaiChanging(value);
 					this.SendPropertyChanging();
-					this._TenDanhMuc = value;
-					this.SendPropertyChanged("TenDanhMuc");
-					this.OnTenDanhMucChanged();
+					this._TenLoai = value;
+					this.SendPropertyChanged("TenLoai");
+					this.OnTenLoaiChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LoaiMonAn_MonAn", Storage="_MonAns", ThisKey="MaDanhMuc", OtherKey="MaDanhMuc")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LoaiMonAn_MonAn", Storage="_MonAns", ThisKey="MaLoai", OtherKey="MaLoai")]
 		public EntitySet<MonAn> MonAns
 		{
 			get
@@ -1697,9 +1749,9 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaMonAn;
+		private string _MaMonAn;
 		
-		private System.Nullable<int> _MaDanhMuc;
+		private string _MaLoai;
 		
 		private string _TenMonAn;
 		
@@ -1713,10 +1765,10 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaMonAnChanging(int value);
+    partial void OnMaMonAnChanging(string value);
     partial void OnMaMonAnChanged();
-    partial void OnMaDanhMucChanging(System.Nullable<int> value);
-    partial void OnMaDanhMucChanged();
+    partial void OnMaLoaiChanging(string value);
+    partial void OnMaLoaiChanged();
     partial void OnTenMonAnChanging(string value);
     partial void OnTenMonAnChanged();
     partial void OnGiaBanChanging(System.Nullable<decimal> value);
@@ -1730,8 +1782,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaMonAn", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MaMonAn
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaMonAn", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaMonAn
 		{
 			get
 			{
@@ -1750,26 +1802,26 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDanhMuc", DbType="Int")]
-		public System.Nullable<int> MaDanhMuc
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaLoai", DbType="Char(20)")]
+		public string MaLoai
 		{
 			get
 			{
-				return this._MaDanhMuc;
+				return this._MaLoai;
 			}
 			set
 			{
-				if ((this._MaDanhMuc != value))
+				if ((this._MaLoai != value))
 				{
 					if (this._LoaiMonAn.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnMaDanhMucChanging(value);
+					this.OnMaLoaiChanging(value);
 					this.SendPropertyChanging();
-					this._MaDanhMuc = value;
-					this.SendPropertyChanged("MaDanhMuc");
-					this.OnMaDanhMucChanged();
+					this._MaLoai = value;
+					this.SendPropertyChanged("MaLoai");
+					this.OnMaLoaiChanged();
 				}
 			}
 		}
@@ -1827,7 +1879,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LoaiMonAn_MonAn", Storage="_LoaiMonAn", ThisKey="MaDanhMuc", OtherKey="MaDanhMuc", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LoaiMonAn_MonAn", Storage="_LoaiMonAn", ThisKey="MaLoai", OtherKey="MaLoai", IsForeignKey=true)]
 		public LoaiMonAn LoaiMonAn
 		{
 			get
@@ -1850,11 +1902,11 @@ namespace DAL
 					if ((value != null))
 					{
 						value.MonAns.Add(this);
-						this._MaDanhMuc = value.MaDanhMuc;
+						this._MaLoai = value.MaLoai;
 					}
 					else
 					{
-						this._MaDanhMuc = default(Nullable<int>);
+						this._MaLoai = default(string);
 					}
 					this.SendPropertyChanged("LoaiMonAn");
 				}
@@ -1900,7 +1952,7 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaNL;
+		private string _MaNL;
 		
 		private string _TenNL;
 		
@@ -1914,13 +1966,11 @@ namespace DAL
 		
 		private EntitySet<CT_PhieuXuat> _CT_PhieuXuats;
 		
-		private EntitySet<NL_NCC> _NL_NCCs;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaNLChanging(int value);
+    partial void OnMaNLChanging(string value);
     partial void OnMaNLChanged();
     partial void OnTenNLChanging(string value);
     partial void OnTenNLChanged();
@@ -1936,12 +1986,11 @@ namespace DAL
 		{
 			this._CT_DDHs = new EntitySet<CT_DDH>(new Action<CT_DDH>(this.attach_CT_DDHs), new Action<CT_DDH>(this.detach_CT_DDHs));
 			this._CT_PhieuXuats = new EntitySet<CT_PhieuXuat>(new Action<CT_PhieuXuat>(this.attach_CT_PhieuXuats), new Action<CT_PhieuXuat>(this.detach_CT_PhieuXuats));
-			this._NL_NCCs = new EntitySet<NL_NCC>(new Action<NL_NCC>(this.attach_NL_NCCs), new Action<NL_NCC>(this.detach_NL_NCCs));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNL", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MaNL
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNL", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaNL
 		{
 			get
 			{
@@ -2066,19 +2115,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NguyenLieu_NL_NCC", Storage="_NL_NCCs", ThisKey="MaNL", OtherKey="MaNL")]
-		public EntitySet<NL_NCC> NL_NCCs
-		{
-			get
-			{
-				return this._NL_NCCs;
-			}
-			set
-			{
-				this._NL_NCCs.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2122,18 +2158,6 @@ namespace DAL
 			this.SendPropertyChanging();
 			entity.NguyenLieu = null;
 		}
-		
-		private void attach_NL_NCCs(NL_NCC entity)
-		{
-			this.SendPropertyChanging();
-			entity.NguyenLieu = this;
-		}
-		
-		private void detach_NL_NCCs(NL_NCC entity)
-		{
-			this.SendPropertyChanging();
-			entity.NguyenLieu = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NhaCungCap")]
@@ -2142,7 +2166,7 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaNCC;
+		private string _MaNCC;
 		
 		private string _TenNCC;
 		
@@ -2154,13 +2178,11 @@ namespace DAL
 		
 		private EntitySet<DonDatHang> _DonDatHangs;
 		
-		private EntitySet<NL_NCC> _NL_NCCs;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaNCCChanging(int value);
+    partial void OnMaNCCChanging(string value);
     partial void OnMaNCCChanged();
     partial void OnTenNCCChanging(string value);
     partial void OnTenNCCChanged();
@@ -2175,12 +2197,11 @@ namespace DAL
 		public NhaCungCap()
 		{
 			this._DonDatHangs = new EntitySet<DonDatHang>(new Action<DonDatHang>(this.attach_DonDatHangs), new Action<DonDatHang>(this.detach_DonDatHangs));
-			this._NL_NCCs = new EntitySet<NL_NCC>(new Action<NL_NCC>(this.attach_NL_NCCs), new Action<NL_NCC>(this.detach_NL_NCCs));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNCC", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MaNCC
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNCC", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaNCC
 		{
 			get
 			{
@@ -2199,7 +2220,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenNCC", DbType="NVarChar(100)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenNCC", DbType="NVarChar(150)")]
 		public string TenNCC
 		{
 			get
@@ -2219,7 +2240,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiaChi", DbType="NVarChar(150)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiaChi", DbType="NVarChar(1500)")]
 		public string DiaChi
 		{
 			get
@@ -2292,19 +2313,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NhaCungCap_NL_NCC", Storage="_NL_NCCs", ThisKey="MaNCC", OtherKey="MaNCC")]
-		public EntitySet<NL_NCC> NL_NCCs
-		{
-			get
-			{
-				return this._NL_NCCs;
-			}
-			set
-			{
-				this._NL_NCCs.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2336,18 +2344,6 @@ namespace DAL
 			this.SendPropertyChanging();
 			entity.NhaCungCap = null;
 		}
-		
-		private void attach_NL_NCCs(NL_NCC entity)
-		{
-			this.SendPropertyChanging();
-			entity.NhaCungCap = this;
-		}
-		
-		private void detach_NL_NCCs(NL_NCC entity)
-		{
-			this.SendPropertyChanging();
-			entity.NhaCungCap = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NhanVien")]
@@ -2356,7 +2352,7 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaNV;
+		private string _MaNV;
 		
 		private string _TenNV;
 		
@@ -2368,7 +2364,7 @@ namespace DAL
 		
 		private string _CMND;
 		
-		private System.Nullable<int> _MaCV;
+		private string _MaCV;
 		
 		private EntitySet<TaiKhoan> _TaiKhoans;
 		
@@ -2384,7 +2380,7 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaNVChanging(int value);
+    partial void OnMaNVChanging(string value);
     partial void OnMaNVChanged();
     partial void OnTenNVChanging(string value);
     partial void OnTenNVChanged();
@@ -2396,7 +2392,7 @@ namespace DAL
     partial void OnSDTChanged();
     partial void OnCMNDChanging(string value);
     partial void OnCMNDChanged();
-    partial void OnMaCVChanging(System.Nullable<int> value);
+    partial void OnMaCVChanging(string value);
     partial void OnMaCVChanged();
     #endregion
 		
@@ -2410,8 +2406,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MaNV
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaNV
 		{
 			get
 			{
@@ -2530,8 +2526,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaCV", DbType="Int")]
-		public System.Nullable<int> MaCV
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaCV", DbType="Char(20)")]
+		public string MaCV
 		{
 			get
 			{
@@ -2633,7 +2629,7 @@ namespace DAL
 					}
 					else
 					{
-						this._MaCV = default(Nullable<int>);
+						this._MaCV = default(string);
 					}
 					this.SendPropertyChanged("ChucVu");
 				}
@@ -2709,183 +2705,15 @@ namespace DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NL_NCC")]
-	public partial class NL_NCC : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _MaNCC;
-		
-		private int _MaNL;
-		
-		private EntityRef<NhaCungCap> _NhaCungCap;
-		
-		private EntityRef<NguyenLieu> _NguyenLieu;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnMaNCCChanging(int value);
-    partial void OnMaNCCChanged();
-    partial void OnMaNLChanging(int value);
-    partial void OnMaNLChanged();
-    #endregion
-		
-		public NL_NCC()
-		{
-			this._NhaCungCap = default(EntityRef<NhaCungCap>);
-			this._NguyenLieu = default(EntityRef<NguyenLieu>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNCC", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaNCC
-		{
-			get
-			{
-				return this._MaNCC;
-			}
-			set
-			{
-				if ((this._MaNCC != value))
-				{
-					if (this._NhaCungCap.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMaNCCChanging(value);
-					this.SendPropertyChanging();
-					this._MaNCC = value;
-					this.SendPropertyChanged("MaNCC");
-					this.OnMaNCCChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNL", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaNL
-		{
-			get
-			{
-				return this._MaNL;
-			}
-			set
-			{
-				if ((this._MaNL != value))
-				{
-					if (this._NguyenLieu.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMaNLChanging(value);
-					this.SendPropertyChanging();
-					this._MaNL = value;
-					this.SendPropertyChanged("MaNL");
-					this.OnMaNLChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NhaCungCap_NL_NCC", Storage="_NhaCungCap", ThisKey="MaNCC", OtherKey="MaNCC", IsForeignKey=true)]
-		public NhaCungCap NhaCungCap
-		{
-			get
-			{
-				return this._NhaCungCap.Entity;
-			}
-			set
-			{
-				NhaCungCap previousValue = this._NhaCungCap.Entity;
-				if (((previousValue != value) 
-							|| (this._NhaCungCap.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._NhaCungCap.Entity = null;
-						previousValue.NL_NCCs.Remove(this);
-					}
-					this._NhaCungCap.Entity = value;
-					if ((value != null))
-					{
-						value.NL_NCCs.Add(this);
-						this._MaNCC = value.MaNCC;
-					}
-					else
-					{
-						this._MaNCC = default(int);
-					}
-					this.SendPropertyChanged("NhaCungCap");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NguyenLieu_NL_NCC", Storage="_NguyenLieu", ThisKey="MaNL", OtherKey="MaNL", IsForeignKey=true)]
-		public NguyenLieu NguyenLieu
-		{
-			get
-			{
-				return this._NguyenLieu.Entity;
-			}
-			set
-			{
-				NguyenLieu previousValue = this._NguyenLieu.Entity;
-				if (((previousValue != value) 
-							|| (this._NguyenLieu.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._NguyenLieu.Entity = null;
-						previousValue.NL_NCCs.Remove(this);
-					}
-					this._NguyenLieu.Entity = value;
-					if ((value != null))
-					{
-						value.NL_NCCs.Add(this);
-						this._MaNL = value.MaNL;
-					}
-					else
-					{
-						this._MaNL = default(int);
-					}
-					this.SendPropertyChanged("NguyenLieu");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PhieuXuat")]
 	public partial class PhieuXuat : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaPX;
+		private string _MaPX;
 		
-		private System.Nullable<int> _MaNV;
+		private string _MaNV;
 		
 		private System.Nullable<System.DateTime> _NgayXuat;
 		
@@ -2899,9 +2727,9 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaPXChanging(int value);
+    partial void OnMaPXChanging(string value);
     partial void OnMaPXChanged();
-    partial void OnMaNVChanging(System.Nullable<int> value);
+    partial void OnMaNVChanging(string value);
     partial void OnMaNVChanged();
     partial void OnNgayXuatChanging(System.Nullable<System.DateTime> value);
     partial void OnNgayXuatChanged();
@@ -2916,8 +2744,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaPX", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MaPX
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaPX", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaPX
 		{
 			get
 			{
@@ -2936,8 +2764,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="Int")]
-		public System.Nullable<int> MaNV
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="Char(20)")]
+		public string MaNV
 		{
 			get
 			{
@@ -3040,7 +2868,7 @@ namespace DAL
 					}
 					else
 					{
-						this._MaNV = default(Nullable<int>);
+						this._MaNV = default(string);
 					}
 					this.SendPropertyChanged("NhanVien");
 				}
@@ -3077,6 +2905,157 @@ namespace DAL
 		{
 			this.SendPropertyChanging();
 			entity.PhieuXuat = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Quyen")]
+	public partial class Quyen : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _MaQuyen;
+		
+		private string _TenQuyen;
+		
+		private string _MaCV;
+		
+		private EntityRef<ChucVu> _ChucVu;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMaQuyenChanging(string value);
+    partial void OnMaQuyenChanged();
+    partial void OnTenQuyenChanging(string value);
+    partial void OnTenQuyenChanged();
+    partial void OnMaCVChanging(string value);
+    partial void OnMaCVChanged();
+    #endregion
+		
+		public Quyen()
+		{
+			this._ChucVu = default(EntityRef<ChucVu>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaQuyen", DbType="Char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MaQuyen
+		{
+			get
+			{
+				return this._MaQuyen;
+			}
+			set
+			{
+				if ((this._MaQuyen != value))
+				{
+					this.OnMaQuyenChanging(value);
+					this.SendPropertyChanging();
+					this._MaQuyen = value;
+					this.SendPropertyChanged("MaQuyen");
+					this.OnMaQuyenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenQuyen", DbType="NVarChar(100)")]
+		public string TenQuyen
+		{
+			get
+			{
+				return this._TenQuyen;
+			}
+			set
+			{
+				if ((this._TenQuyen != value))
+				{
+					this.OnTenQuyenChanging(value);
+					this.SendPropertyChanging();
+					this._TenQuyen = value;
+					this.SendPropertyChanged("TenQuyen");
+					this.OnTenQuyenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaCV", DbType="Char(20)")]
+		public string MaCV
+		{
+			get
+			{
+				return this._MaCV;
+			}
+			set
+			{
+				if ((this._MaCV != value))
+				{
+					if (this._ChucVu.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMaCVChanging(value);
+					this.SendPropertyChanging();
+					this._MaCV = value;
+					this.SendPropertyChanged("MaCV");
+					this.OnMaCVChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ChucVu_Quyen", Storage="_ChucVu", ThisKey="MaCV", OtherKey="MaCV", IsForeignKey=true)]
+		public ChucVu ChucVu
+		{
+			get
+			{
+				return this._ChucVu.Entity;
+			}
+			set
+			{
+				ChucVu previousValue = this._ChucVu.Entity;
+				if (((previousValue != value) 
+							|| (this._ChucVu.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ChucVu.Entity = null;
+						previousValue.Quyens.Remove(this);
+					}
+					this._ChucVu.Entity = value;
+					if ((value != null))
+					{
+						value.Quyens.Add(this);
+						this._MaCV = value.MaCV;
+					}
+					else
+					{
+						this._MaCV = default(string);
+					}
+					this.SendPropertyChanged("ChucVu");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

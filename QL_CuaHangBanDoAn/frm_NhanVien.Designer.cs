@@ -153,7 +153,7 @@
             this.layoutControl2.Controls.Add(this.simpleButton5);
             this.layoutControl2.Location = new System.Drawing.Point(12, 12);
             this.layoutControl2.Name = "layoutControl2";
-            this.layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(573, 621, 975, 600);
+            this.layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(573, 420, 975, 600);
             this.layoutControl2.Root = this.layoutControlGroup1;
             this.layoutControl2.Size = new System.Drawing.Size(1094, 631);
             this.layoutControl2.TabIndex = 4;

@@ -18,46 +18,86 @@ namespace QL_CuaHangBanDoAn
             InitializeComponent();
         }
 
+        private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            frm_Order px = new frm_Order();
+            px.MdiParent = this;
+            px.Show();
+        }
+
+        private void barButtonItem7_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            frm_PhieuXuat px = new frm_PhieuXuat();
+            px.MdiParent = this;
+            px.Show();
+        }
+
+        private void barButtonItem10_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            frm_DTTheoNgay px = new frm_DTTheoNgay();
+            px.MdiParent = this;
+            px.Show();
+        }
+
+        private void barButtonItem13_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            
+        }
+
         private void barButtonItem12_ItemClick(object sender, ItemClickEventArgs e)
         {
-            frm_DonDatHang ddh = new frm_DonDatHang();
-            ddh.MdiParent = this;
-            ddh.Show();
+            frm_DonDatHang1 px = new frm_DonDatHang1();
+            px.MdiParent = this;
+            px.Show();
         }
 
-        private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
+        private void barButtonItem15_ItemClick(object sender, ItemClickEventArgs e)
         {
-            frm_QLMonAn frm = new frm_QLMonAn();
-            frm.MdiParent = this;
-            frm.Show();
-        }
-
-        private void barButtonItem5_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            frm_QLNCC frm = new frm_QLNCC();
-            frm.MdiParent = this;
-            frm.Show();
-        }
-
-        private void barButtonItem4_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            frm_QLNguyenLieu frm = new frm_QLNguyenLieu();
-            frm.MdiParent = this;
-            frm.Show();
+            DS_DonDatHang px = new DS_DonDatHang();
+            px.MdiParent = this;
+            px.Show();
         }
 
         private void barButtonItem2_ItemClick(object sender, ItemClickEventArgs e)
         {
-            frm_QLLoai frm = new frm_QLLoai();
-            frm.MdiParent = this;
-            frm.Show();
+            frm_QLLoai px = new frm_QLLoai();
+            px.MdiParent = this;
+            px.Show();
         }
 
-        private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+        private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
         {
-            frm_Order frm = new frm_Order();
-            frm.MdiParent = this;
-            frm.Show();
+            frm_QLMonAn px = new frm_QLMonAn();
+            px.MdiParent = this;
+            px.Show();
+        }
+
+        private void barButtonItem4_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            frm_QLNguyenLieu px = new frm_QLNguyenLieu();
+            px.MdiParent = this;
+            px.Show();
+        }
+
+        private void barButtonItem5_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            frm_QLNCC px = new frm_QLNCC();
+            px.MdiParent = this;
+            px.Show();
+        }
+
+        private void barButtonItem8_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            frm_NhanVien px = new frm_NhanVien();
+            px.MdiParent = this;
+            px.Show();
+        }
+
+        private void barButtonItem9_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            frm_DS_TaiKhoan px = new frm_DS_TaiKhoan();
+            px.MdiParent = this;
+            px.Show();
         }
     }
 }

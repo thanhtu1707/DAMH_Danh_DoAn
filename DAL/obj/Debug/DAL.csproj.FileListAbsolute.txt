@@ -5,3 +5,10 @@ D:\HOC_TAP\DAMH_Danh-master\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
 D:\HOC_TAP\DAMH_Danh-master\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 D:\HOC_TAP\DAMH_Danh-master\DAL\obj\Debug\DAL.dll
 D:\HOC_TAP\DAMH_Danh-master\DAL\obj\Debug\DAL.pdb
+C:\Users\nhu\Desktop\DoAn_ThayDanh\DAMH_Danh_DoAn\DAL\bin\Debug\DAL.dll.config
+C:\Users\nhu\Desktop\DoAn_ThayDanh\DAMH_Danh_DoAn\DAL\bin\Debug\DAL.dll
+C:\Users\nhu\Desktop\DoAn_ThayDanh\DAMH_Danh_DoAn\DAL\bin\Debug\DAL.pdb
+C:\Users\nhu\Desktop\DoAn_ThayDanh\DAMH_Danh_DoAn\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\nhu\Desktop\DoAn_ThayDanh\DAMH_Danh_DoAn\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\nhu\Desktop\DoAn_ThayDanh\DAMH_Danh_DoAn\DAL\obj\Debug\DAL.dll
+C:\Users\nhu\Desktop\DoAn_ThayDanh\DAMH_Danh_DoAn\DAL\obj\Debug\DAL.pdb
